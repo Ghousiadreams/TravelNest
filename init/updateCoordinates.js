@@ -1,17 +1,8 @@
+// init/updateCoordinates.js
 const axios = require("axios");
 const Listing = require("../models/listing");
-const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/travelnest", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", async () => {
-  console.log("Database connected");
-
+const updateCoordinates = async () => {
   const listings = await Listing.find({});
   for (let listing of listings) {
     if (!listing.coordinates || !listing.coordinates.lat || !listing.coordinates.lon) {
@@ -24,7 +15,7 @@ db.once("open", async () => {
             limit: 1,
           },
           headers: {
-            "User-Agent": "TravelNest/1.0 (travelnest.project@gmail.com)" // Use your project email
+            "User-Agent": "TravelNest/1.0 (travelnest.project@gmail.com)"
           }
         });
 
@@ -37,16 +28,14 @@ db.once("open", async () => {
           console.log(`⚠️ No coordinates found for: ${fullAddress}`);
         }
 
-        // Add the delay here before going to the next listing
         await new Promise((resolve) => setTimeout(resolve, 1000));
-
       } catch (err) {
         console.error(`❌ Error for ${fullAddress}:`, err.message);
       }
     }
   }
 
-  mongoose.connection.close();
+  console.log("✅ Coordinates update completed.");
+};
 
-    console.log("Coordinates update completed.");
-});
+module.exports = updateCoordinates;

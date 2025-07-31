@@ -108,15 +108,16 @@ app.get('/run-init', async (req, res) => {
     const initDB = require('./init/index.js');
     const updateCoords = require('./init/updateCoordinates.js');
 
-    await initDB();             // Initialize DB
-    await updateCoords();       // Update coordinates
+    await initDB();
+    await updateCoords();
 
-    res.send("✅ Initialization and update completed.");
+    res.send("✅ Initialization and coordinate update completed.");
   } catch (err) {
     console.error("🔥 Error during init:", err);
     res.status(500).send("❌ Initialization failed.");
   }
 });
+
 
 
 
