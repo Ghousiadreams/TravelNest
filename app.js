@@ -23,6 +23,8 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const wishlistRouter = require("./routes/wishlist.js"); 
 
+const Listing = require('./models/listing');
+
 
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
@@ -89,10 +91,11 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
-  res.render('listings/index');
-});
 
+app.get('/', async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render('listings/index', { allListings });
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
