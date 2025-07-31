@@ -103,6 +103,18 @@ app.use("/", userRouter);
 app.use("/wishlist", wishlistRouter);
 
 
+app.get('/run-init', async (req, res) => {
+    try {
+        await require('./init/index.js')();               // Initialize DB
+        await require('./init/updateCoordinates.js')();   // Update coordinates
+        res.send("✅ DB and Coordinates initialized successfully.");
+    } catch (err) {
+        console.error("🔥 Error during init:", err);
+        res.status(500).send("❌ Initialization failed. Check logs.");
+    }
+});
+
+
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
 });
