@@ -18,7 +18,8 @@
             </div>
 
             <div class="navbar-nav ms-auto">
-                <% if (currUser) { %>
+                <% if (typeof currUser !== 'undefined' && currUser) { %>
+
                 <a class="nav-link" href="/wishlist">Wishlist &nbsp;<i class="fa-solid fa-heart"></i></a>
                 <% } %>
                 <% if(!currUser) {%>
