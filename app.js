@@ -103,20 +103,20 @@ app.use("/", userRouter);
 app.use("/wishlist", wishlistRouter);
 
 
-app.get('/run-init', async (req, res) => {
-  try {
-    const initDB = require('./init/index.js');
-    const updateCoords = require('./init/updateCoordinates.js');
+// app.get('/run-init', async (req, res) => {
+//   try {
+//     const initDB = require('./init/index.js');
+//     const updateCoords = require('./init/updateCoordinates.js');
 
-    await initDB();
-    await updateCoords();
+//     await initDB();
+//     await updateCoords();
 
-    res.send("✅ Initialization and coordinate update completed.");
-  } catch (err) {
-    console.error("🔥 Error during init:", err);
-    res.status(500).send("❌ Initialization failed.");
-  }
-});
+//     res.send("✅ Initialization and coordinate update completed.");
+//   } catch (err) {
+//     console.error("🔥 Error during init:", err);
+//     res.status(500).send("❌ Initialization failed.");
+//   }
+// });
 
 
 

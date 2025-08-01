@@ -1,7 +1,7 @@
 const lat = parseFloat(document.getElementById("map").dataset.lat);
 const lon = parseFloat(document.getElementById("map").dataset.lon);
 
-const map = L.map("map").setView([lat, lon], 13);
+const map = L.map("map").setView([lat, lon], 7);
 
 
 // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {

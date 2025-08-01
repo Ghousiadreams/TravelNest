@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md border-bottom sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/listings"><i class="fa-solid fa-dove"></i> <span class="brand-text">TravelNest</span></a>
+        <a class="navbar-brand" href="/listings">
+            <i class="fa-solid fa-dove"></i> <span class="brand-text">TravelNest</span>
+        </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,18 +10,19 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             
-            <div class="navbar-nav mx-auto align-items-center"> 
+            <div class="navbar-nav mx-auto align-items-center flex-grow-1 justify-content-center"> 
                 <a class="nav-link" href="/listings">Discover Retreats</a>
                 <a class="nav-link me-3" href="/listings/new">List Your Space</a> 
-                <form method="GET" action="/listings/search" class="d-flex" role="search">
-                    <input class="form-control me-2 search-input" type="search" placeholder="Search destinations..." aria-label="Search">
-                    <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <form method="GET" action="/listings/search" class="d-flex my-2 my-md-0" role="search">
+                    <input class="form-control search-input" type="search" placeholder="Search destinations..." aria-label="Search">
+                    <button class="btn search-btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </form>
             </div>
 
             <div class="navbar-nav ms-auto">
                 <% if (typeof currUser !== 'undefined' && currUser) { %>
-
                 <a class="nav-link" href="/wishlist">Wishlist &nbsp;<i class="fa-solid fa-heart"></i></a>
                 <% } %>
                 <% if(!currUser) {%>
@@ -33,18 +36,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    let searchInput = document.querySelector('.search-input');
-    let searchBtn = document.querySelector('.search-btn');
-    searchBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        let searchQuery = searchInput.value.trim();
-        if (searchQuery) {
-            window.location.href = `/listings/search?q=${encodeURIComponent(searchQuery)}`;
-        } else {
-            alert("Please enter a search term.");
-        }
-    });
-    
-</script>
